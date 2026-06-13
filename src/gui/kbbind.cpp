@@ -239,8 +239,17 @@ void KbBind::update(QFile& cmd, int notify, bool force){
             cmd.write(keyLatin1);
             // if a macro definiton for the key is given,
             // add the converted string to key-buffer "macro"
-            if (act->isMacro() && act->macroContent().length() > 0) {
-                macros.append("macro " + keyLatin1 + ":" + act->macroContent().toLatin1() + "\n");
+            if (act->isMacro()) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QList<QStringView> macroContent = QStringView(act->value()).split(':');
+#else // QT_VERSION < 6.0.0
+                QVector<QStringRef> macroContent = act->value().splitRef(':');
+#endif
+                // Fields used: 1 - daemon string, 5 - repetition delay
+                if (macroContent.at(1).length() > 0)
+                    macros.append("macro " + keyLatin1 + ":" + macroContent.at(1).toLatin1());
+                if (macroContent.length() > 5 && macroContent.at(5).length() > 0)
+                    macros.append(":" + macroContent.at(5).toLatin1());
             }
         } else {
             // Otherwise, write the binding
