@@ -445,7 +445,7 @@ const key keymap_bragi[N_KEYS_BRAGI_PATCH] = {
     { "light",         113, KEY_CORSAIR },
     { "lock",          1,   KEY_CORSAIR },
     { "ro",            115, KEY_RO },
-    { 0,               -1,  KEY_NONE },
+    { "ctrlwheelcw",    -1, KEY_CORSAIR },
     { 0,               -1,  KEY_NONE },
     { 0,               -1,  KEY_NONE },
     { 0,               -1,  KEY_NONE },
@@ -458,7 +458,7 @@ const key keymap_bragi[N_KEYS_BRAGI_PATCH] = {
     { "prev",          126, KEY_PREVIOUSSONG },
     { "mr",            -1,  KEY_CORSAIR },
     { "profswitch",    128, KEY_CORSAIR },
-    { "ctrlwheelcw",    -1, KEY_CORSAIR },
+    { 0,                -1, KEY_NONE },
     { "ctrlwheelccw",   -1, KEY_CORSAIR },
     { "g1",            131, KEY_CORSAIR },
     { "g2",            132, KEY_CORSAIR },
@@ -908,7 +908,7 @@ void process_input_urb(void* context, unsigned char* buffer, int urblen, ushort 
                     // Always clear the control wheel key bits.
                     // This will enable the daemon to emulate keyup events in inputupdate_keys().
                     if (DEV_HAS_CTRLWHEEL(kb)) {
-                        CLEAR_KEYBIT(targetkb->input.keys, 129);
+                        CLEAR_KEYBIT(targetkb->input.keys, 116);
                         CLEAR_KEYBIT(targetkb->input.keys, 130);
                     }
 
@@ -925,7 +925,7 @@ void process_input_urb(void* context, unsigned char* buffer, int urblen, ushort 
                             memcpy(&wheel, buffer + 4, sizeof(int32_t));
                             if(wheel > 0) {
                                 // Apply fresh key data: clockwise rotation
-                                SET_KEYBIT(targetkb->input.keys, 129);
+                                SET_KEYBIT(targetkb->input.keys, 116);
                             } else {
                                 // Apply fresh key data: counter-clockwise rotation
                                 SET_KEYBIT(targetkb->input.keys, 130);

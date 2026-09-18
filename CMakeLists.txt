@@ -104,6 +104,7 @@ cmake_dependent_option(WITH_INVADERS "Build with 'Invaders' animation." ON "WITH
 cmake_dependent_option(WITH_LIFE     "Build with 'Life' animation."     ON "WITH_ANIMATIONS;WITH_GUI" OFF)
 cmake_dependent_option(WITH_SNAKE    "Build with 'Snake' animation."    ON "WITH_ANIMATIONS;WITH_GUI" OFF)
 cmake_dependent_option(WITH_PIPE     "Build with 'Pipe' animation."     ON "WITH_ANIMATIONS;WITH_GUI" OFF)
+cmake_dependent_option(WITH_PLASMA   "Build with 'Plasma' animation."   ON "WITH_ANIMATIONS;WITH_GUI" OFF)
 
 if (LINUX)
     cmake_dependent_option(WITH_MVIZ  "Build with music visualizer."           ON "WITH_ANIMATIONS;WITH_GUI" OFF)

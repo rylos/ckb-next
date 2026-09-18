@@ -86,6 +86,20 @@ QString KeyAction::defaultAction(const QString& key, KeyMap::Model model){
     if(key == "profdn")
         return "$mode:-4";
 
+    // The K70 CORE RGB only has a dial. Bind the Volume Barrel/Mute for its rotation/press.
+    if(key == "ctrlwheelcw") {
+        if(model == KeyMap::K70_CORE_RGB)
+            return "volup";
+    }
+    if(key == "ctrlwheelccw") {
+        if(model == KeyMap::K70_CORE_RGB)
+            return "voldn";
+    }
+    if(key == "ctrlwheelb") {
+        if(model == KeyMap::K70_CORE_RGB)
+            return "mute";
+    }
+
 #ifdef Q_OS_MACOS
     // macOS has no forwards and backwards, so we bind them to macros that simulate that action
     if(key == "mouse4")

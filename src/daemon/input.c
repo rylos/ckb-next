@@ -12,7 +12,7 @@
 #define IS_VOLWHEEL(scan)      (((scan) == KEY_VOLUMEUP  || (scan) == KEY_VOLUMEDOWN) && DEV_HAS_VOLWHEEL(kb))
 // Lookup control wheel events by index in keymap. Alternatively one could check for non-null key->name to start with "ctrlwheel".
 // FIXME: Replace by proper lookup of map in keymap.
-#define IS_CTRLWHEEL(kb, index) ((kb)->protocol == PROTO_BRAGI && ((index) == 129 || (index) == 130))
+#define IS_CTRLWHEEL(kb, index) ((kb)->protocol == PROTO_BRAGI && ((index) == 116 || (index) == 130))
 
 static int macromask(const uchar* keys, const uchar* macro){
     // Scan a macro against key input. Return 0 if any of them don't match

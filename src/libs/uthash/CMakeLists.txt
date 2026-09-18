@@ -1,9 +1,9 @@
-#   Copyright 2017-2018 ckb-next Development Team <ckb-next@googlegroups.com>
+#   Copyright 2026 ckb-next Development Team
 #   All rights reserved.
-#   
+#
 #   Redistribution and use in source and binary forms, with or without
 #   modification, are permitted provided that the following conditions are met:
-#   
+#
 #   1. Redistributions of source code must retain the above copyright notice,
 #   this list of conditions and the following disclaimer.
 #   2. Redistributions in binary form must reproduce the above copyright
@@ -11,8 +11,8 @@
 #   documentation and/or other materials provided with the distribution.
 #   3. Neither the name of the copyright holder nor the names of its
 #   contributors may be used to endorse or promote products derived from this
-#   software without specific prior written permission. 
-#   
+#   software without specific prior written permission.
+#
 #   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 #   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 #   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,11 +24,20 @@
 #   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #   POSSIBILITY OF SUCH DAMAGE.
+#
+#   See Copyright notice in include/uthash.h regarding its distribution terms.
 
-if (WITH_MVIZ) # otherwise doesn't make sense to include
-    add_subdirectory(kissfft)
-endif ()
+project(UtHash VERSION 2.3.0)
 
-# ckb-next libraries
-add_subdirectory(ckb-next)
-add_subdirectory(uthash)
+add_library(${PROJECT_NAME} INTERFACE)
+add_library(${CMAKE_PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+target_include_directories(
+    ${PROJECT_NAME}
+        INTERFACE
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+            $<INSTALL_INTERFACE:include>)
+
+install(
+    TARGETS UtHash
+    INCLUDES DESTINATION "include")
